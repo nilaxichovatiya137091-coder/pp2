@@ -1,18 +1,36 @@
-//Enter N elements and find out sum of odd and even numbers using dynamic array
+//Write a program to enter N elements and arrange the list in ascending order using shell sort.
 #include <stdio.h>
-#include <stdlib.h>
+
 int main()
 {
-    int n, eSum = 0, oSum = 0;
-    printf("Enter N: "); scanf("%d", &n);
-    int *arr = (int*)malloc(n * sizeof(int));
-    for(int i=0; i<n; i++)
-    {
-        scanf("%d", &arr[i]);
-        if(arr[i] % 2 == 0) eSum += arr[i];
-        else oSum += arr[i];
+    int a[100], n, i, j, gap, temp;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter %d elements:\n", n);
+    for (i=0; i<n; i++) {
+        scanf("%d", &a[i]);
     }
-    printf("Even Sum: %d, Odd Sum: %d", eSum, oSum);
-    free(arr);
+
+    for (gap=n/2; gap>0; gap/=2) {
+
+        for (i=gap; i<n; i++) {
+            temp=a[i];
+
+            for (j=i; j>=gap && a[j-gap]>temp; j-=gap) {
+                a[j]=a[j-gap];
+            }
+
+            a[j]=temp;
+        }
+    }
+
+    printf("\nSorted list in ascending order:\n");
+    for (i=0; i<n; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+
     return 0;
 }

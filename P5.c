@@ -1,23 +1,38 @@
-//Enter N elements and find out sum of prime numbers using dynamic array.
+//Write a program to enter N elements and arrange the list in ascending order using selection sort.
 #include <stdio.h>
-#include <stdlib.h>
-int isPrime(int n)
-{
-    if (n < 2) return 0;
-    for (int i = 2; i*i <= n; i++) if (n % i == 0) return 0;
-    return 1;
-}
+
 int main()
 {
-    int n, sum = 0;
-    printf("Enter N: "); scanf("%d", &n);
-    int *arr = (int*)malloc(n * sizeof(int));
-    for(int i=0; i<n; i++)
-    {
-        scanf("%d", &arr[i]);
-        if(isPrime(arr[i])) sum += arr[i];
+    int a[100], n, i, j, min_idx, temp;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter %d elements:\n", n);
+    for (i=0; i<n; i++) {
+        scanf("%d", &a[i]);
     }
-    printf("Sum of Primes: %d", sum);
-    free(arr);
+
+    for (i=0; i<n-1; i++) {
+        min_idx=i;
+        for (j=i+1; j<n; j++) {
+            if (a[j]<a[min_idx]) {
+                min_idx=j;
+            }
+        }
+
+        if (min_idx!=i) {
+            temp=a[min_idx];
+            a[min_idx]=a[i];
+            a[i]=temp;
+        }
+    }
+
+    printf("\nSorted list in ascending order:\n");
+    for (i=0; i<n; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+
     return 0;
 }

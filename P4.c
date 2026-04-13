@@ -1,18 +1,33 @@
-//Enter N elements and find out sum and average of them using dynamic array.
+//Write a program to enter N elements and arrange the list in ascending order using bubble sort.
 #include <stdio.h>
-#include <stdlib.h>
+
 int main()
 {
-    int n, i;
-    float sum = 0;
-    printf("Enter N: "); scanf("%d", &n);
-    int *arr = (int*)malloc(n * sizeof(int));
-    for(i=0; i<n; i++)
-    {
-        scanf("%d", &arr[i]);
-        sum += arr[i];
+    int a[100], n, i, j, temp;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter %d elements:\n", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
     }
-    printf("Sum: %.2f, Avg: %.2f", sum, sum/n);
-    free(arr);
+
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (a[j] > a[j + 1]) {
+                temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("\nSorted list in ascending order:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+
     return 0;
 }
